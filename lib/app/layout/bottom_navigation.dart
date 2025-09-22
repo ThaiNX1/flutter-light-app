@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:htezlife/core/config/size_config.dart';
-import 'components/finger_widget.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
@@ -10,16 +9,14 @@ class BottomNavigation extends StatelessWidget {
   final List<String> _routes = const [
     '/home',
     '/control',
-    '/check-in-out',
     '/history',
     '/profile',
   ];
 
   int _indexForLocation(String location) {
     if (location.startsWith('/control')) return 1;
-    if (location.startsWith('/check-in-out')) return 2;
-    if (location.startsWith('/history')) return 3;
-    if (location.startsWith('/profile')) return 4;
+    if (location.startsWith('/history')) return 2;
+    if (location.startsWith('/profile')) return 3;
     return 0; // default: home
   }
 
@@ -94,12 +91,12 @@ class BottomNavigation extends StatelessWidget {
               // History
               Expanded(
                 child: InkWell(
-                  onTap: () => onItemTapped(3),
+                  onTap: () => onItemTapped(2),
                   child: Center(
                     child: SvgPicture.asset(
                       'assets/icons/svg/nav_history.svg',
                       colorFilter: ColorFilter.mode(
-                        selectedIndex == 3
+                        selectedIndex == 2
                             ? Colors.blueAccent
                             : Color(0xFF464646),
                         BlendMode.srcIn,
@@ -111,12 +108,12 @@ class BottomNavigation extends StatelessWidget {
               // Profile
               Expanded(
                 child: InkWell(
-                  onTap: () => onItemTapped(4),
+                  onTap: () => onItemTapped(3),
                   child: Center(
                     child: SvgPicture.asset(
                       'assets/icons/svg/nav_user.svg',
                       colorFilter: ColorFilter.mode(
-                        selectedIndex == 4
+                        selectedIndex == 3
                             ? Colors.blueAccent
                             : Color(0xFF464646),
                         BlendMode.srcIn,
@@ -126,15 +123,6 @@ class BottomNavigation extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-        ),
-        // Dùng widget đã tách
-        Positioned(
-          left: MediaQuery.of(context).size.width / 2 - 32,
-          top: -24,
-          child: FingerprintBottomButton(
-            selected: selectedIndex == 2,
-            onTap: () => onItemTapped(2),
           ),
         ),
       ],
