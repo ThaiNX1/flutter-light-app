@@ -1,0 +1,857 @@
+"""
+Indicates exactly one field must be supplied and this field must not be `null`.
+"""
+directive @oneOf on INPUT_OBJECT
+
+"""Exposes a URL that specifies the behavior of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behavior of this scalar."""
+  url: String!
+) on SCALAR
+
+input AppValidatorBeaconInput {
+  major: Float!
+  minor: Float!
+  timestamp: Float
+}
+
+type BusinessRole {
+  children: [BusinessRole!]
+  code: String!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  orgRoleCode: String!
+  organization: Organization
+  organizationId: String
+  parent: BusinessRole
+  parentId: String
+  permissions: [String!]!
+  updatedAt: DateTime!
+}
+
+input ChangePasswordInput {
+  confirmPassword: String!
+  newPassword: String!
+  oldPassword: String!
+}
+
+type CheckInOutConfig {
+  applyEndTime: Float
+  applyStartTime: Float!
+  checkInOutPoint: CheckInOutPoint
+  checkInOutPointId: String
+  code: String!
+  createdAt: DateTime!
+  dayOff: [Float!]!
+  deletedAt: DateTime
+  description: String
+  endTime: String!
+  flexibleEndMinutes: Float
+  flexibleStartMinutes: Float!
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  organization: Organization
+  organizationId: String!
+  startTime: String!
+  timeZone: String
+  totalTime: Float
+  type: ShiftType!
+  updatedAt: DateTime!
+}
+
+type CheckInOutHistory {
+  checkInOutDate: Float
+  checkInOutPoint: CheckInOutPoint!
+  checkInOutPointId: String
+  checkInOutPointIdWithDate: String
+  checkInTime: Float
+  checkOutTime: Float
+  codeConfig: String!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  endTimeConfig: String
+  id: ID!
+  isActive: Boolean
+  note: String
+  organization: Organization
+  organizationId: String
+  startTimeConfig: String
+  status: CheckInOutStatus
+  totalTimeConfig: Float
+  type: ShiftType
+  updatedAt: DateTime!
+  user: User!
+  userId: String
+}
+
+input CheckInOutHistoryFilterInput {
+  endDate: Float
+  startDate: Float
+  userId: String
+}
+
+type CheckInOutHistoryResponse {
+  correctItems: [CheckInOutHistory!]!
+  inCorrectItems: [CheckInOutHistory!]!
+}
+
+type CheckInOutHistoryWithConfigResponse {
+  configs: [CheckInOutConfig!]
+  data: CheckInOutHistory
+}
+
+type CheckInOutPoint {
+  checkInOutConfig: CheckInOutConfig
+  checkInOutConfigId: String
+  checkInRanges: [TimeRange!]!
+  checkOutRanges: [TimeRange!]!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String
+  id: ID!
+  isActive: Boolean!
+  latitude: Float
+  location: String
+  longitude: Float
+  name: String!
+  organization: Organization
+  organizationId: String!
+  updatedAt: DateTime!
+}
+
+"""The status of the check-in-out history"""
+enum CheckInOutStatus {
+  Early
+  Late
+  OnTime
+}
+
+type Country {
+  createdAt: DateTime!
+  deletedAt: DateTime
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  postCode: String!
+  provinces: [Province!]
+  updatedAt: DateTime!
+  zipCode: String!
+}
+
+input CreateBusinessRoleInput {
+  code: RoleCode!
+  description: String
+  name: String!
+  organizationId: ID
+  parentId: ID
+  permissions: [String!]
+}
+
+input CreateCheckInOutConfigInput {
+  applyEndTime: Float
+  applyStartTime: Float!
+  dayOff: [Int!]
+  description: String
+  endTime: String!
+  flexibleEndMinutes: Float
+  flexibleStartMinutes: Float
+  isActive: Boolean! = true
+  name: String!
+  startTime: String!
+  type: ShiftType!
+}
+
+input CreateCheckInOutHistoryInput {
+  checkInOutPointId: String!
+  note: String
+  userId: String!
+}
+
+input CreateCheckInOutPointInput {
+  checkInRanges: [TimeRangeInput!]
+  checkOutRanges: [TimeRangeInput!]
+  description: String
+  location: String
+  name: String!
+  organizationId: ID!
+}
+
+input CreateCountryInput {
+  name: String!
+  postCode: String!
+  zipCode: String!
+}
+
+input CreateDeviceInput {
+  description: String
+  deviceTypeId: String
+  firmwareVersion: String
+  hardwareVersion: String
+  isActive: Boolean
+  name: String!
+  organizationId: ID
+  serialNumber: String!
+}
+
+input CreateDeviceTypeInput {
+  code: String!
+  description: String
+  name: String!
+  switchCount: Float
+}
+
+input CreateFirmwareInput {
+  description: String
+  deviceTypeIds: [String!]
+  fileName: String!
+  filePath: String!
+  name: String!
+  releaseNotes: String
+  version: String!
+}
+
+input CreateOrganizationInput {
+  address: String
+  description: String
+  deviceIds: [ID!]
+  email: String
+  isActive: Boolean! = true
+  name: String!
+  phone: String
+}
+
+input CreateRoomInput {
+  code: String
+  description: String
+  deviceIds: [String!]
+  name: String!
+}
+
+input CreateUserInput {
+  checkInOutConfigIds: [ID!]
+  email: String!
+  name: String!
+  organizationId: ID
+  password: String
+  roleIds: [ID!]
+  roomIds: [ID!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Device {
+  activeAt: Float
+  basePath: String
+  bucket: String
+  controlSwitch1: DeviceControlEnum
+  controlSwitch2: DeviceControlEnum
+  controlSwitch3: DeviceControlEnum
+  controlSwitch4: DeviceControlEnum
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String
+  deviceInfo: JSON
+  deviceType: DeviceType
+  deviceTypeId: String
+  expiredAt: Float
+  firmware: Firmware
+  firmwareId: String
+  firmwareVersion: String
+  hardwareVersion: String
+  id: ID!
+  isActive: Boolean!
+  latitude: Float
+  longitude: Float
+  major: Float
+  name: String
+  organization: Organization
+  organizationId: String
+  otaStatus: DeviceControlOtaStatusEnum
+  privateKeyBasepath: String
+  publicKeyBasepath: String
+  room: Room
+  roomId: String
+  serialNumber: String!
+  state: DeviceStateEnum
+  updatedAt: DateTime!
+  warrantyMonth: Float
+  wifiInfo: JSON
+}
+
+"""The different types of device control"""
+enum DeviceControlEnum {
+  OFF
+  ON
+}
+
+input DeviceControlInput {
+  controlSwitch1: DeviceControlEnum
+  controlSwitch2: DeviceControlEnum
+  controlSwitch3: DeviceControlEnum
+  controlSwitch4: DeviceControlEnum
+  id: String!
+}
+
+"""The different types of device control"""
+enum DeviceControlOtaStatusEnum {
+  Check_Data_Invalid
+  Check_Data_Valid
+  End_Update
+  Ota_Fail
+  Ota_Success
+  Start_Update
+}
+
+input DeviceOnboardInput {
+  id: String!
+  latitude: Float
+  longitude: Float
+}
+
+input DeviceSearchInput {
+  deviceTypeId: ID
+  isActive: Boolean
+  keyword: String = ""
+  organizationId: ID
+  page: Int! = 1
+  roomId: ID
+  size: Int! = 20
+  state: DeviceStateEnum
+}
+
+"""The different types of device state"""
+enum DeviceStateEnum {
+  ERROR
+  OFFLINE
+  ONBOARDING
+  ONLINE
+  TIMEOUT
+}
+
+type DeviceType {
+  code: String!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String
+  firmware: Firmware
+  firmwareId: String
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  switchCount: Float
+  updatedAt: DateTime!
+}
+
+type Firmware {
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String
+  deviceTypes: [DeviceType!]
+  devices: [Device!]
+  fileName: String!
+  filePath: String!
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  releaseNotes: String
+  updatedAt: DateTime!
+  version: String!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type LoginResponse {
+  access_token: String!
+  checkInOutConfigs: [CheckInOutConfig!]
+  menus: JSONObject!
+  user: User!
+  userPermissions: [String!]!
+}
+
+type Mutation {
+  activeDevice(ids: [String!]!): [Device!]!
+  appLogin(input: LoginInput!): LoginResponse!
+  appValidatorBeacon(input: AppValidatorBeaconInput!): CheckInOutHistory
+  assignDeviceToOrganization(deviceId: ID!, organizationId: ID!): Device!
+  assignPermissionRole(permissionId: ID!, roleId: ID!): Permission!
+  assignUserRole(roleId: ID!, userId: ID!): User!
+  changePassword(input: ChangePasswordInput!): User!
+  confirmOtp(otp: String!): Boolean!
+  controlDevice(input: DeviceControlInput!): Device!
+  createBusinessRole(input: CreateBusinessRoleInput!): BusinessRole!
+  createCheckInOutConfig(input: CreateCheckInOutConfigInput!): CheckInOutConfig!
+  createCheckInOutHistory(input: CreateCheckInOutHistoryInput!): CheckInOutHistory!
+  createCheckInOutPoint(input: CreateCheckInOutPointInput!): CheckInOutPoint!
+  createCountry(input: CreateCountryInput!): Country!
+  createDevice(input: CreateDeviceInput!): Device!
+  createDeviceType(input: CreateDeviceTypeInput!): DeviceType!
+  createFirmware(input: CreateFirmwareInput!): Firmware!
+  createOrganization(input: CreateOrganizationInput!): Organization!
+  createRoom(input: CreateRoomInput!): Room!
+  createUser(input: CreateUserInput!): User!
+  deleteBusinessRole(id: ID!): Boolean!
+  deleteCheckInOutConfig(id: String!): Boolean!
+  deleteCheckInOutHistory(id: String!): Boolean!
+  deleteCheckInOutPoint(id: String!): Boolean!
+  deleteCountry(id: ID!): Country!
+  deleteDevice(id: ID!): Boolean!
+  deleteDeviceType(id: ID!): Boolean!
+  deleteFirmware(id: ID!): Boolean!
+  deleteOrganization(id: ID!): Boolean!
+  deleteUser(id: ID!): Boolean!
+  importDevice(file: Upload!): [Device!]!
+  importProvince: [Province!]!
+  importUser(file: Upload!): [User!]!
+  importWard: [Ward!]!
+  login(input: LoginInput!): LoginResponse!
+  logout(token: String!): String!
+  onboardDevice(input: DeviceOnboardInput!): Device!
+  otaDevice(id: String!): Device!
+  removeDeviceFromOrganization(deviceIds: [String!]!): [Device!]!
+  removePermissionRole(permissionId: ID!, roleId: ID!): Permission!
+  removeRoom(id: String!): Boolean!
+  removeUserRole(roleId: ID!, userId: ID!): User!
+  resendOtp: Boolean!
+  resetDevice(id: String!): Device!
+  subscribeNotification(deviceToken: String!): User!
+  testNotification: String!
+  updateBasicInfoRoom(id: String!, input: UpdateRoomInput!): Room!
+  updateBusinessRole(id: ID!, input: UpdateBusinessRoleInput!): BusinessRole!
+  updateCheckInOutConfig(id: String!, input: UpdateCheckInOutConfigInput!): CheckInOutConfig!
+  updateCheckInOutHistory(input: UpdateCheckInOutHistoryInput!): CheckInOutHistory!
+  updateCheckInOutPoint(id: String!, input: UpdateCheckInOutPointInput!): CheckInOutPoint!
+  updateCountry(id: ID!, input: UpdateCountryInput!): Country!
+  updateDevice(id: ID!, input: UpdateDeviceInput!): Device!
+  updateDeviceType(id: ID!, input: UpdateDeviceTypeInput!): DeviceType!
+  updateFirmware(id: ID!, input: UpdateFirmwareInput!): Firmware!
+  updateOrganization(id: ID!, input: UpdateOrganizationInput!): Organization!
+  updateRoom(id: String!, input: UpdateRoomInput!): Room!
+  updateUser(id: ID!, input: UpdateUserInput!): User!
+  uploadFile(file: Upload!, folder: String!): String!
+}
+
+type Organization {
+  address: String
+  apiKey: String
+  code: String
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String
+  devices: [Device!]
+  email: String
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  phone: String
+  subDomain: String
+  updatedAt: DateTime!
+  webhookUrl: String
+}
+
+type PaginatedBusinessRoleResponse {
+  data: [BusinessRole!]!
+  pagination: PaginationResponse!
+}
+
+type PaginatedCheckInOutConfigResponse {
+  data: [CheckInOutConfig!]!
+  pagination: PaginationResponse!
+}
+
+type PaginatedCheckInOutHistoryResponse {
+  data: [CheckInOutHistory!]!
+  pagination: PaginationResponse!
+}
+
+type PaginatedCheckInOutPointResponse {
+  data: [CheckInOutPoint!]!
+  pagination: PaginationResponse!
+}
+
+type PaginatedDeviceResponse {
+  data: [Device!]!
+  pagination: PaginationResponse!
+}
+
+type PaginatedDeviceTypeResponse {
+  data: [DeviceType!]!
+  pagination: PaginationResponse!
+}
+
+type PaginatedFirmwareResponse {
+  data: [Firmware!]!
+  pagination: PaginationResponse!
+}
+
+type PaginatedOrganizationResponse {
+  data: [Organization!]!
+  pagination: PaginationResponse!
+}
+
+type PaginatedRoomResponse {
+  data: [Room!]!
+  total: Float!
+}
+
+type PaginatedUserResponse {
+  data: [User!]!
+  pagination: PaginationResponse!
+}
+
+input PaginationInput {
+  keyword: String = ""
+  page: Int! = 1
+  size: Int! = 20
+}
+
+type PaginationResponse {
+  page: Int!
+  size: Int!
+  total: Int!
+  totalPages: Int!
+}
+
+type Permission {
+  action: String!
+  code: String!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  roles: [BusinessRole!]
+  sampleManagement: Boolean!
+  type: String
+  updatedAt: DateTime!
+}
+
+"""The type of permission"""
+enum PermissionTypeEnum {
+  ADMINISTRATOR
+  END_USER
+  ORGANIZATION_ADMIN
+}
+
+type Province {
+  code: String!
+  country: Country!
+  countryId: String
+  createdAt: DateTime!
+  deletedAt: DateTime
+  id: ID!
+  name: String!
+  name_with_type: String
+  slug: String
+  type: String
+  updatedAt: DateTime!
+  wards: [Ward!]
+}
+
+type Query {
+  allRoomsByOrganization: [Room!]!
+  allRoomsByOrganizationWithDevice: [Room!]!
+  allRoomsByUserWithDevice: [Room!]!
+  appGetCheckInOutHistory(endDate: Float!, startDate: Float!): CheckInOutHistoryResponse!
+  appGetCurrentCheckInOutHistory: CheckInOutHistoryWithConfigResponse!
+  businessRole(id: ID!): BusinessRole!
+  businessRoleByCode(code: RoleCode!): BusinessRole!
+  businessRoles(pagination: PaginationInput): PaginatedBusinessRoleResponse!
+  checkInOutConfig(id: String!): CheckInOutConfig!
+  checkInOutConfigs(pagination: PaginationInput): PaginatedCheckInOutConfigResponse!
+  checkInOutHistories(filter: CheckInOutHistoryFilterInput, pagination: PaginationInput): PaginatedCheckInOutHistoryResponse!
+  checkInOutHistory(id: String!): CheckInOutHistory!
+  checkInOutPoint(id: String!): CheckInOutPoint!
+  checkInOutPoints(pagination: PaginationInput): PaginatedCheckInOutPointResponse!
+  countries: [Country!]!
+  country(id: ID!): Country!
+  device(id: ID!): Device!
+  deviceType(id: ID!): DeviceType!
+  deviceTypes(pagination: PaginationInput): PaginatedDeviceTypeResponse!
+  devices(pagination: DeviceSearchInput): PaginatedDeviceResponse!
+  devicesByOrganization: [Device!]!
+  firmware(id: ID!): Firmware!
+  firmwares(pagination: PaginationInput): PaginatedFirmwareResponse!
+  firmwaresByDeviceType(deviceTypeId: String!): [Firmware!]!
+  getAllDeviceMajor: [Device!]!
+  getWeatherInfo(hours: [Float!] = [], latLng: String!): WeatherResponse!
+  organization(id: ID!): Organization!
+  organizations(pagination: PaginationInput): PaginatedOrganizationResponse!
+  permission(id: ID!): Permission!
+  permissions: [Permission!]!
+  permissionsByType(type: PermissionTypeEnum!): [Permission!]!
+  province(id: ID!): Province!
+  provinces: [Province!]!
+  provincesByCountry(countryId: ID!): [Province!]!
+  roleHierarchy: [BusinessRole!]!
+  room(id: String!): Room!
+  rooms(pagination: PaginationInput): PaginatedRoomResponse!
+  roomsByOrganization(organizationId: String!, pagination: PaginationInput): PaginatedRoomResponse!
+  user(id: ID!): User!
+  userProfile: User!
+  users(pagination: PaginationInput): PaginatedUserResponse!
+  ward(id: ID!): Ward!
+  wards: [Ward!]!
+  wardsByProvince(provinceId: ID!): [Ward!]!
+}
+
+"""The different types of business roles"""
+enum RoleCode {
+  ADMINISTRATOR
+  END_USER
+  ORGANIZATION_ADMIN
+}
+
+type Room {
+  code: String
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String
+  devices: [Device!]
+  id: ID!
+  isActive: Boolean
+  name: String!
+  organization: Organization
+  organizationId: String
+  updatedAt: DateTime!
+}
+
+"""The type of shift for check-in-out configuration"""
+enum ShiftType {
+  AFTERNOON_SHIFT
+  FULLTIME
+  MORNING_SHIFT
+  NIGHT_SHIFT
+}
+
+type TimeRange {
+  end: Float!
+  start: Float!
+}
+
+input TimeRangeInput {
+  end: String!
+  start: String!
+}
+
+input UpdateBusinessRoleInput {
+  code: RoleCode
+  description: String
+  name: String
+  organizationId: ID
+  parentId: ID
+  permissions: [String!]
+}
+
+input UpdateCheckInOutConfigInput {
+  applyEndTime: Float
+  applyStartTime: Float
+  dayOff: [Int!]
+  description: String
+  endTime: String
+  flexibleEndMinutes: Int
+  flexibleStartMinutes: Int
+  isActive: Boolean
+  name: String
+  startTime: String
+  type: ShiftType
+}
+
+input UpdateCheckInOutHistoryInput {
+  checkInOutPointId: String
+  id: String!
+  note: String
+  userId: String
+}
+
+input UpdateCheckInOutPointInput {
+  checkInRanges: [TimeRangeInput!]
+  checkOutRanges: [TimeRangeInput!]
+  description: String
+  isActive: Boolean
+  location: String
+  name: String
+  organizationId: ID
+}
+
+input UpdateCountryInput {
+  name: String
+  postCode: String
+  zipCode: String
+}
+
+input UpdateDeviceInput {
+  description: String
+  deviceTypeId: String
+  firmwareVersion: String
+  hardwareVersion: String
+  isActive: Boolean
+  name: String
+  organizationId: ID
+  serial: String
+  warrantyMonth: Float
+}
+
+input UpdateDeviceTypeInput {
+  code: String
+  description: String
+  isActive: Boolean
+  name: String
+  switchCount: Float
+}
+
+input UpdateFirmwareInput {
+  description: String
+  deviceTypeIds: [String!]
+  fileName: String
+  filePath: String
+  isActive: Boolean
+  name: String
+  releaseNotes: String
+  version: String
+}
+
+input UpdateOrganizationInput {
+  address: String
+  description: String
+  deviceIds: [ID!]
+  email: String
+  isActive: Boolean
+  name: String
+  phone: String
+}
+
+input UpdateRoomInput {
+  code: String
+  description: String
+  deviceIds: [String!]
+  name: String
+}
+
+input UpdateUserInput {
+  checkInOutConfigIds: [ID!]
+  email: String
+  isActive: Boolean
+  isRequiredReLogin: Boolean
+  isResetPassword: Boolean
+  name: String
+  organizationId: ID
+  password: String
+  roleIds: [ID!]
+  roomIds: [ID!]
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type User {
+  checkInOutConfigIds: [String!]
+  checkInOutConfigs: [CheckInOutConfig!]
+  createdAt: DateTime!
+  deletedAt: DateTime
+  deviceToken: String
+  email: String!
+  id: ID!
+  isActive: Boolean!
+  isRequiredReLogin: Boolean!
+  jobEndDate: Float
+  jobStartDate: Float
+  jobStatus: UserJobStatus!
+  name: String!
+  organization: Organization
+  organizationId: String
+  roles: [BusinessRole!]
+  rooms: [Room!]
+  state: UserState!
+  updatedAt: DateTime!
+}
+
+"""The job status of the user account"""
+enum UserJobStatus {
+  Active
+  Probation
+  Resigned
+}
+
+"""The state of the user account"""
+enum UserState {
+  ACTIVE
+  CONFIRM_OTP
+  INACTIVE
+  RESET_PASSWORD
+}
+
+type Ward {
+  code: String!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  id: ID!
+  name: String!
+  name_with_type: String
+  path: String
+  path_with_type: String
+  province: Province!
+  provinceId: String!
+  slug: String
+  type: String
+  updatedAt: DateTime!
+}
+
+type WeatherCondition {
+  code: Float!
+  icon: String!
+  text: String!
+}
+
+type WeatherCurrent {
+  cloud: Float!
+  condition: WeatherCondition!
+  humidity: Float!
+  last_updated: String!
+  last_updated_epoch: Float!
+  temp_c: Float!
+  uv: Float!
+}
+
+type WeatherHour {
+  condition: WeatherCondition!
+  temp_c: Float!
+  time: String!
+  time_epoch: Float!
+  uv: Float!
+}
+
+type WeatherLocation {
+  country: String!
+  localtime: String!
+  localtime_epoch: Float!
+  name: String!
+}
+
+type WeatherResponse {
+  current: WeatherCurrent!
+  hours: [WeatherHour!]!
+  location: WeatherLocation!
+}
+

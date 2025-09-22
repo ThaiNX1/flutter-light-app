@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1012555142627",
+    "project_id": "ht-stg-f450b",
+    "storage_bucket": "ht-stg-f450b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012555142627:android:d2d2878cd04143f3767cd6",
+        "android_client_info": {
+          "package_name": "htezlife.co.vn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8c-Be7vNs_QvL9b_3fMphzmwgmzhOMi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012555142627:android:dc3ffd9ba76b685e767cd6",
+        "android_client_info": {
+          "package_name": "htezlife.co.vn.htezlife"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8c-Be7vNs_QvL9b_3fMphzmwgmzhOMi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "my-flutter-app",
+  "version": "1.0.0",
+  "scripts": {
+    "get-schema": "npx get-graphql-schema https://angular18-be-production.up.railway.app/graphql > lib/core/graphql/schema.graphql",
+    "codegen": "flutter pub run build_runner build --delete-conflicting-outputs",
+    "graphql-gen": "npm run get-schema && npm run codegen",
+    "patch-unfreezed": "node lib/graphql/tools/patch_unfreezed.mjs"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^6.0.0",
+    "@graphql-codegen/flutter-freezed": "^4.0.1"
+  }
+}
