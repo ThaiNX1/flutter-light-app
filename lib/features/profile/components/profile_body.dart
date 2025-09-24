@@ -1,4 +1,3 @@
-import 'package:cryptography/cryptography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +7,6 @@ import 'package:htezlife/core/provider/base_widget.dart';
 import 'package:htezlife/core/services/common_service.dart';
 import 'package:htezlife/core/services/core_service.dart';
 import 'package:htezlife/core/utils/util.dart';
-import 'package:htezlife/features/control/widget/sh_switcher.dart';
 import 'package:htezlife/shared/preferences/common_preferences.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -170,43 +168,6 @@ class _ProfileBodyState extends State<ProfileBody>
                       ),
                     ),
                     SizedBox(height: 40),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20.0,
-                        right: 20.0,
-                        top: 10.0,
-                        bottom: 10.0,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        spacing: getProportionateScreenWidth(20),
-                        children: [
-                          Icon(
-                            Icons.fingerprint,
-                            size: 32,
-                            color: Colors.white,
-                          ),
-                          Flexible(
-                            child: Text(
-                              'Chấm công vân tay/Face ID',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          SHSwitcher(
-                            value: _isFaceIdOn,
-                            onChanged: onChangeValueFaceId,
-                            showText: false,
-                          ),
-                        ],
-                      ),
-                    ),
                     InkWell(
                       onTap: () {},
                       child: Padding(

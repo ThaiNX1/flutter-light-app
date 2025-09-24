@@ -117,13 +117,6 @@ class _LoginBodyState extends State<LoginBody> with ProviderHelper<LoginBody> {
           'name': 'Thiết bị',
         };
         break;
-      case 'rooms':
-        result = {
-          'path': '/room',
-          'icon': 'assets/icons/svg/menu_setting.svg',
-          'name': 'Phòng',
-        };
-        break;
       default:
         return {};
     }

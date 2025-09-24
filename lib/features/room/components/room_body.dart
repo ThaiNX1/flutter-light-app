@@ -2,15 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:htezlife/core/config/size_config.dart';
 import 'package:htezlife/core/constants/common_constant.dart';
 import 'package:htezlife/core/constants/theme_constant.dart';
-import 'package:htezlife/core/enums/view_state.dart';
 import 'package:htezlife/core/graphql/queries/room.query.dart';
-import 'package:htezlife/core/guard/guard_permission.dart';
 import 'package:htezlife/core/provider/base_widget.dart';
 import 'package:htezlife/core/services/socket_service.dart';
-import 'package:htezlife/features/room/widgets/room_grid_item.dart';
-import 'package:htezlife/features/room/widgets/room_list_item.dart';
+import 'package:htezlife/features/home/widgets/dark_container.dart';
 import 'package:htezlife/shared/entity/room_socket_response.dart';
 
 class RoomBody extends StatefulWidget {
@@ -109,94 +107,6 @@ class _RoomBodyState extends State<RoomBody> with ProviderHelper<RoomBody> {
     setState(() {
       rooms = _rooms;
     });
-    _ensureRoomUpdateStream();
-  }
-
-  void _ensureRoomUpdateStream() {
-    _roomUpdateSub ??= socketService
-        .listen<RoomSocketResponse>(SocketEvent.roomUpdate)
-        .listen((room) {
-          print('===========roomUpdate:============= $room');
-          onUpdateDevice(room.devices![0].toMap());
-        });
-  }
-
-  void onUpdateDevice(Map<String, dynamic> updatedDevice) {
-    // Tìm room chứa device này (an toàn với indexWhere)
-    final roomIndex = rooms.indexWhere(
-      (r) => r['id'] == updatedDevice['roomId'],
-    );
-    if (roomIndex < 0) return;
-
-    final room = Map<String, dynamic>.from(rooms[roomIndex]);
-    final List devices = List.from(room['devices'] ?? const []);
-
-    // Map lại toàn bộ devices trong room, tính lại hasSwitchOn/isAllOn cho từng device
-    final List<Map<String, dynamic>>
-    newDevices = devices.map<Map<String, dynamic>>((d0) {
-      final d = Map<String, dynamic>.from(d0);
-
-      // Nếu là device cần cập nhật, lấy trạng thái mới từ updatedDevice
-      final bool isTarget = d['id'] == updatedDevice['id'];
-
-      // Lấy nguồn data trạng thái switch: ưu tiên từ updatedDevice nếu là target
-      final Map<String, dynamic> source = isTarget
-          ? Map<String, dynamic>.from(updatedDevice['data'] ?? updatedDevice)
-          : d;
-
-      // Bản sao switches để không mutate trực tiếp
-      final List<Map<String, dynamic>> switches =
-          (d['switches'] as List?)
-              ?.map<Map<String, dynamic>>((s) => Map<String, dynamic>.from(s))
-              .toList() ??
-          <Map<String, dynamic>>[];
-
-      var hasSwitchOn = false;
-      var isDeviceAllOn = true;
-
-      for (var i = 0; i < switches.length; i++) {
-        final key = 'controlSwitch${i + 1}';
-        final bool isOn = source[key] == DeviceControlEnum.on;
-        switches[i]['value'] = isOn;
-
-        if (isOn) hasSwitchOn = true;
-        isDeviceAllOn &= isOn;
-      }
-
-      return {
-        ...d,
-        'switches': switches,
-        'hasSwitchOn': hasSwitchOn,
-        'isAllOn': isDeviceAllOn,
-      };
-    }).toList();
-
-    // Tính lại các field tổng của room
-    final bool isRoomAllOn =
-        newDevices.isNotEmpty && newDevices.every((d) => d['isAllOn'] == true);
-    final int countOn = newDevices
-        .where((d) => d['hasSwitchOn'] == true)
-        .length;
-
-    final updatedRoom = {
-      ...room,
-      'devices': newDevices,
-      'isAllOn': isRoomAllOn,
-      'countOn': countOn,
-    };
-    setState(() {
-      rooms[roomIndex] = updatedRoom;
-    });
-  }
-
-  void onAction({required String action}) {
-    switch (action) {
-      case 'add':
-        context.push('/room/add');
-        break;
-      case 'delete':
-        break;
-    }
   }
 
   @override
@@ -223,50 +133,40 @@ class _RoomBodyState extends State<RoomBody> with ProviderHelper<RoomBody> {
         ),
         centerTitle: true,
         actions: [
-          PermWidget(
-            mode: DenyMode.hide,
-            any: [PermissionEnum.roomsManage],
-            child: MenuAnchor(
-              alignmentOffset: const Offset(-16, 8),
-              consumeOutsideTap: true,
-              style: MenuStyle(
-                backgroundColor: WidgetStatePropertyAll(MyColor.bgBoxBlueGrey),
-                elevation: WidgetStatePropertyAll(6),
-              ),
-              controller: actionAppbarController,
-              builder: (context, ctrl, child) => IconButton(
-                icon: Icon(Icons.more_vert_rounded, color: Colors.white),
-                onPressed: () => ctrl.isOpen ? ctrl.close() : ctrl.open(),
-              ),
-              menuChildren: [
-                MenuItemButton(
-                  onPressed: () {
-                    actionAppbarController.close();
-                    onAction(action: 'add');
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.add_circle_outline),
-                      SizedBox(width: 8),
-                      Text('Thêm'),
-                    ],
-                  ),
-                ),
-                MenuItemButton(
-                  onPressed: () {
-                    actionAppbarController.close();
-                    onAction(action: 'delete');
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.remove_circle_outline, color: Colors.red),
-                      SizedBox(width: 8),
-                      Text('Xóa'),
-                    ],
-                  ),
-                ),
-              ],
+          MenuAnchor(
+            alignmentOffset: const Offset(-16, 8),
+            consumeOutsideTap: true,
+            style: MenuStyle(
+              backgroundColor: WidgetStatePropertyAll(MyColor.bgBoxBlueGrey),
+              elevation: WidgetStatePropertyAll(6),
             ),
+            controller: actionAppbarController,
+            builder: (context, ctrl, child) => IconButton(
+              icon: Icon(Icons.more_vert_rounded, color: Colors.white),
+              onPressed: () => ctrl.isOpen ? ctrl.close() : ctrl.open(),
+            ),
+            menuChildren: [
+              MenuItemButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Icon(Icons.add_circle_outline),
+                    SizedBox(width: 8),
+                    Text('Thêm'),
+                  ],
+                ),
+              ),
+              MenuItemButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Icon(Icons.remove_circle_outline, color: Colors.red),
+                    SizedBox(width: 8),
+                    Text('Xóa'),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -291,7 +191,7 @@ class _RoomBodyState extends State<RoomBody> with ProviderHelper<RoomBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                isGridView ? _buildGridView(rooms) : _buildListView(rooms),
+                _buildGridView(rooms)
               ],
             ),
           ),
@@ -338,17 +238,6 @@ class _RoomBodyState extends State<RoomBody> with ProviderHelper<RoomBody> {
     );
   }
 
-  Widget _buildListView(List<Map<String, dynamic>> rooms) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: rooms.length,
-      itemBuilder: (context, index) {
-        return RoomListItem(room: rooms[index]);
-      },
-    );
-  }
-
   Widget _buildGridView(List<Map<String, dynamic>> rooms) {
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
@@ -362,7 +251,19 @@ class _RoomBodyState extends State<RoomBody> with ProviderHelper<RoomBody> {
       ),
       itemCount: rooms.length,
       itemBuilder: (context, index) {
-        return RoomGridItem(room: rooms[index]);
+        return Padding(
+          padding: EdgeInsets.all(getProportionateScreenHeight(5)),
+          child: DarkContainer(
+            itsOn: rooms[index]['isAllOn'],
+            switchButton: () {},
+            onTap: () {},
+            iconAsset: 'assets/icons/svg/speaker.svg',
+            device: rooms[index]['name'],
+            deviceCount: rooms[index]['devices'].length.toString() + ' device',
+            switchFav: () {},
+            isFav: false,
+          ),
+        );
       },
     );
   }

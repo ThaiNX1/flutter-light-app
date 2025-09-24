@@ -6,6 +6,7 @@ import 'package:htezlife/core/config/size_config.dart';
 import 'package:htezlife/core/graphql/queries/extra.query.dart';
 import 'package:htezlife/core/provider/base_widget.dart';
 import 'package:htezlife/core/utils/util.dart';
+import 'package:htezlife/features/home/widgets/dark_container.dart';
 import 'package:htezlife/shared/preferences/common_preferences.dart';
 import 'package:jiffy/jiffy.dart';
 
@@ -267,6 +268,41 @@ class _HomeBodyState extends State<HomeBody> with ProviderHelper<HomeBody> {
                   ],
                 ),
               ),
+              // Phòng
+              Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(getProportionateScreenHeight(5)),
+                    child: DarkContainer(
+                      itsOn: true,
+                      switchButton: () {},
+                      onTap: () {},
+                      iconAsset: 'assets/icons/svg/light.svg',
+                      device: 'Phòng ngủ',
+                      deviceCount: '4 đèn',
+                      switchFav: () {},
+                      isFav: false,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(getProportionateScreenHeight(5)),
+                    child: DarkContainer(
+                      itsOn: false,
+                      switchButton: () {},
+                      onTap: () {},
+                      iconAsset: 'assets/icons/svg/ac.svg',
+                      device: 'Phòng khách',
+                      deviceCount: '8 đèn',
+                      switchFav: () {},
+                      isFav: true,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             ],
           ),
         ),

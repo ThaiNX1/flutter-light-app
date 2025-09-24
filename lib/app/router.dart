@@ -1,8 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:htezlife/core/services/ble_plus_service.dart';
 import 'package:htezlife/features/auth/confirm_otp_screen.dart';
-import 'package:htezlife/features/control/control_screen.dart';
-import 'package:htezlife/features/control/room_detail_screen.dart';
 import 'package:htezlife/features/device/components/wifi_setup_body.dart';
 import 'package:htezlife/features/device/device_detail_screen.dart';
 import 'package:htezlife/features/device/device_screen.dart';
@@ -10,6 +8,7 @@ import 'package:htezlife/features/device/onboard_screen.dart';
 import 'package:htezlife/features/history/history_screen.dart';
 import 'package:htezlife/features/home/home_screen.dart';
 import 'package:htezlife/features/profile/profile_screen.dart';
+import 'package:htezlife/features/room/room_detail_screen.dart';
 import 'package:htezlife/features/room/room_screen.dart';
 import 'package:htezlife/shared/widgets/custom_transitions_page.dart';
 import 'package:htezlife/core/services/common_service.dart';
@@ -74,7 +73,17 @@ GoRouter createRoute(
         GoRoute(
           path: '/control',
           pageBuilder: (context, state) =>
-              myTransitionPage(ControlScreen(), state),
+              myTransitionPage(RoomScreen(), state),
+        ),
+        GoRoute(
+          path: '/control/:id',
+          pageBuilder: (context, state) {
+            final roomId = state.pathParameters['id'] ?? '';
+            return myTransitionPage(
+              RoomDetailScreen(id: roomId),
+              state,
+            );
+          },
         ),
         GoRoute(
           path: '/history',
@@ -111,19 +120,6 @@ GoRouter createRoute(
               WifiSetupBody(device: device, blePlusService: blePlusService),
               state,
             );
-          },
-        ),
-        GoRoute(
-          path: '/room',
-          pageBuilder: (context, state) =>
-              myTransitionPage(RoomScreen(), state),
-        ),
-        GoRoute(
-          path: '/room-detail/:id',
-          pageBuilder: (context, state) {
-            final extra = state.extra as Map<String, dynamic>;
-            final room = extra['room'];
-            return myTransitionPage(RoomDetailScreen(room: room), state);
           },
         ),
       ],
