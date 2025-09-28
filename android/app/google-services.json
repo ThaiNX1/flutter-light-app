@@ -26,6 +26,25 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1012555142627:android:5fa471462c5c8cbe767cd6",
+        "android_client_info": {
+          "package_name": "htezlife.co.vn.homemind"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8c-Be7vNs_QvL9b_3fMphzmwgmzhOMi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1012555142627:android:dc3ffd9ba76b685e767cd6",
         "android_client_info": {
           "package_name": "htezlife.co.vn.htezlife"

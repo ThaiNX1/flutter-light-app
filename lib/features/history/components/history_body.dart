@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/constants/common_constant.dart';
-import 'package:htezlife/core/constants/theme_constant.dart';
-import 'package:htezlife/core/graphql/queries/check_in_out.query.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
-import 'package:htezlife/core/utils/util.dart';
-import 'package:htezlife/shared/widgets/sliver_grid_fixed_row.dart';
+import 'package:homemind/core/constants/common_constant.dart';
+import 'package:homemind/core/constants/theme_constant.dart';
+import 'package:homemind/core/graphql/queries/check_in_out.query.dart';
+import 'package:homemind/core/provider/base_widget.dart';
+import 'package:homemind/core/utils/util.dart';
+import 'package:homemind/shared/widgets/sliver_grid_fixed_row.dart';
 import 'package:jiffy/jiffy.dart';
 
 class HistoryBody extends StatefulWidget {

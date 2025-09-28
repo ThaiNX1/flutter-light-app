@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/config/size_config.dart';
-import 'package:htezlife/core/graphql/queries/user.query.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
-import 'package:htezlife/core/services/common_service.dart';
-import 'package:htezlife/core/services/core_service.dart';
-import 'package:htezlife/core/utils/util.dart';
-import 'package:htezlife/shared/preferences/common_preferences.dart';
+import 'package:homemind/core/config/size_config.dart';
+import 'package:homemind/core/graphql/queries/user.query.dart';
+import 'package:homemind/core/provider/base_widget.dart';
+import 'package:homemind/core/services/common_service.dart';
+import 'package:homemind/core/services/core_service.dart';
+import 'package:homemind/core/utils/util.dart';
+import 'package:homemind/shared/preferences/common_preferences.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 

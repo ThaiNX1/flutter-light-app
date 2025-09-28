@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/config/size_config.dart';
+import 'package:homemind/core/config/size_config.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
 
-  final List<String> _routes = const [
-    '/home',
-    '/control',
-    '/history',
-    '/profile',
-  ];
+  final List<String> _routes = const ['/home', '/room', '/history', '/profile'];
 
   int _indexForLocation(String location) {
-    if (location.startsWith('/control')) return 1;
+    if (location.startsWith('/room')) return 1;
     if (location.startsWith('/history')) return 2;
     if (location.startsWith('/profile')) return 3;
     return 0; // default: home
@@ -79,13 +74,6 @@ class BottomNavigation extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-              ),
-              // Checkin
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => onItemTapped(2),
-                  child: Center(child: SizedBox.shrink()),
                 ),
               ),
               // History

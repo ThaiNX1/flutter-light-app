@@ -1,4 +1,4 @@
-import 'package:htezlife/core/constants/common_constant.dart';
+import 'package:homemind/core/constants/common_constant.dart';
 
 class DeviceSocketResponse {
   late final String id; // gán đúng 1 lần trong fromJson

@@ -1,4 +1,4 @@
-import 'package:htezlife/core/constants/common_constant.dart';
+import 'package:homemind/core/constants/common_constant.dart';
 import 'package:jiffy/jiffy.dart';
 
 String dayOfWeekVN(int d) {

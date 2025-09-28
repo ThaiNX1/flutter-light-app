@@ -1,6 +1,6 @@
 // lib/theme.dart
 import 'package:flutter/material.dart';
-import 'package:htezlife/core/constants/theme_constant.dart';
+import 'package:homemind/core/constants/theme_constant.dart';
 
 class AppTheme {
   static ThemeData light() => _theme(Brightness.light);

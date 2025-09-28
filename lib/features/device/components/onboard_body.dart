@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/config/size_config.dart';
-import 'package:htezlife/core/constants/common_constant.dart';
-import 'package:htezlife/core/graphql/queries/device.query.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
-import 'package:htezlife/core/services/ble_plus_service.dart';
-import 'package:htezlife/core/utils/util.dart';
-import 'package:htezlife/features/device/widgets/device_info.dart';
-import 'package:htezlife/features/device/widgets/radar_scan.dart';
+import 'package:homemind/core/config/size_config.dart';
+import 'package:homemind/core/constants/common_constant.dart';
+import 'package:homemind/core/graphql/queries/device.query.dart';
+import 'package:homemind/core/provider/base_widget.dart';
+import 'package:homemind/core/services/ble_plus_service.dart';
+import 'package:homemind/core/utils/util.dart';
+import 'package:homemind/features/device/widgets/device_info.dart';
+import 'package:homemind/features/device/widgets/radar_scan.dart';
 
 class OnboardBody extends StatefulWidget {
   const OnboardBody({super.key});

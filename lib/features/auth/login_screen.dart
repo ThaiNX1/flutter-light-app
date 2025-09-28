@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:htezlife/core/config/size_config.dart';
-import 'package:htezlife/features/auth/components/login_body.dart';
+import 'package:homemind/core/config/size_config.dart';
+import 'package:homemind/features/auth/components/login_body.dart';
 
 class LoginScreen extends StatelessWidget {
   static String routeName = '/login-screen';
@@ -11,9 +11,7 @@ class LoginScreen extends StatelessWidget {
     SizeConfig().init(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: SafeArea(
-        child: SingleChildScrollView(reverse: true, child: LoginBody()),
-      ),
+      body: SafeArea(child: LoginBody()),
     );
   }
 }

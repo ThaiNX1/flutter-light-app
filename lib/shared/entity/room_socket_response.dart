@@ -1,4 +1,4 @@
-import 'package:htezlife/shared/entity/device_socket_response.dart';
+import 'package:homemind/shared/entity/device_socket_response.dart';
 
 class RoomSocketResponse {
   late final String id;

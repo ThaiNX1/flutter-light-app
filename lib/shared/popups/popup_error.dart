@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:htezlife/shared/popups/popup_state.dart';
+import 'package:homemind/shared/popups/popup_state.dart';
 
 class PopupError extends PopupState {
   const PopupError({

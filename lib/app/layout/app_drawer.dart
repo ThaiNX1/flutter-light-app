@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/app/layout/components/menu_list.dart';
+import 'package:homemind/app/layout/components/menu_list.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});

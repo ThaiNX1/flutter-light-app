@@ -4,12 +4,12 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/constants/common_constant.dart';
-import 'package:htezlife/core/graphql/queries/device.query.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
-import 'package:htezlife/core/services/ble_plus_service.dart';
-import 'package:htezlife/core/utils/util.dart';
-import 'package:htezlife/shared/preferences/common_preferences.dart';
+import 'package:homemind/core/constants/common_constant.dart';
+import 'package:homemind/core/graphql/queries/device.query.dart';
+import 'package:homemind/core/provider/base_widget.dart';
+import 'package:homemind/core/services/ble_plus_service.dart';
+import 'package:homemind/core/utils/util.dart';
+import 'package:homemind/shared/preferences/common_preferences.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class WifiSetupBody extends StatefulWidget {
@@ -83,7 +83,9 @@ class _WifiSetupBodyState extends State<WifiSetupBody>
               context.pop({
                 ...widget.device,
                 'state': result?['onboardDevice']?['state'],
-                'stateName': getStateName(result?['onboardDevice']?['state'] as String),
+                'stateName': getStateName(
+                  result?['onboardDevice']?['state'] as String,
+                ),
               });
             }
           } else {

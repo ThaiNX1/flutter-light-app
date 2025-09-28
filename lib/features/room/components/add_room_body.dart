@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
+import 'package:homemind/core/provider/base_widget.dart';
 
 class AddRoomBody extends StatefulWidget {
   const AddRoomBody({super.key});
@@ -9,7 +9,8 @@ class AddRoomBody extends StatefulWidget {
   State<AddRoomBody> createState() => _AddRoomBodyState();
 }
 
-class _AddRoomBodyState extends State<AddRoomBody> with ProviderHelper<AddRoomBody> {
+class _AddRoomBodyState extends State<AddRoomBody>
+    with ProviderHelper<AddRoomBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,9 +23,7 @@ class _AddRoomBodyState extends State<AddRoomBody> with ProviderHelper<AddRoomBo
         title: const Text('Thêm phòng'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text('Add room'),
-      ),
+      body: const Center(child: Text('Add room')),
     );
   }
 }

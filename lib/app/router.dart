@@ -1,32 +1,27 @@
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/services/ble_plus_service.dart';
-import 'package:htezlife/features/auth/confirm_otp_screen.dart';
-import 'package:htezlife/features/device/components/wifi_setup_body.dart';
-import 'package:htezlife/features/device/device_detail_screen.dart';
-import 'package:htezlife/features/device/device_screen.dart';
-import 'package:htezlife/features/device/onboard_screen.dart';
-import 'package:htezlife/features/history/history_screen.dart';
-import 'package:htezlife/features/home/home_screen.dart';
-import 'package:htezlife/features/profile/profile_screen.dart';
-import 'package:htezlife/features/room/room_detail_screen.dart';
-import 'package:htezlife/features/room/room_screen.dart';
-import 'package:htezlife/shared/widgets/custom_transitions_page.dart';
-import 'package:htezlife/core/services/common_service.dart';
+import 'package:homemind/core/services/ble_plus_service.dart';
+import 'package:homemind/features/auth/confirm_otp_screen.dart';
+import 'package:homemind/features/device/components/wifi_setup_body.dart';
+import 'package:homemind/features/device/device_detail_screen.dart';
+import 'package:homemind/features/device/device_screen.dart';
+import 'package:homemind/features/device/onboard_screen.dart';
+import 'package:homemind/features/history/history_screen.dart';
+import 'package:homemind/features/home/home_screen.dart';
+import 'package:homemind/features/profile/profile_screen.dart';
+import 'package:homemind/features/room/room_detail_screen.dart';
+import 'package:homemind/features/room/room_screen.dart';
+import 'package:homemind/shared/widgets/custom_transitions_page.dart';
+import 'package:homemind/core/services/common_service.dart';
 import 'package:provider/provider.dart';
 import '../core/guard/auth_provider.dart';
 import '../features/auth/login_screen.dart';
 import 'layout/main_scaffold.dart';
-import 'package:htezlife/app/app.dart';
+import 'package:homemind/app/app.dart';
 
 import 'router_refresh_stream.dart';
 
 bool getShowBottomNav(String location, bool globalToggle) {
-  const showRoutes = [
-    '/home',
-    '/control',
-    '/history',
-    '/profile',
-  ];
+  const showRoutes = ['/home', '/room', '/history', '/profile'];
   return globalToggle && showRoutes.any((route) => location.startsWith(route));
 }
 
@@ -36,7 +31,7 @@ GoRouter createRoute(
   CommonService commonService,
 ) => GoRouter(
   navigatorKey: rootNavigatorKey,
-  initialLocation: '/home',
+  initialLocation: '/room',
   refreshListenable: refreshStream,
   routes: [
     GoRoute(path: '/login', builder: (context, state) => LoginScreen()),
@@ -71,18 +66,15 @@ GoRouter createRoute(
               myTransitionPage(ProfileScreen(), state),
         ),
         GoRoute(
-          path: '/control',
+          path: '/room',
           pageBuilder: (context, state) =>
               myTransitionPage(RoomScreen(), state),
         ),
         GoRoute(
-          path: '/control/:id',
+          path: '/detail-room/:id',
           pageBuilder: (context, state) {
             final roomId = state.pathParameters['id'] ?? '';
-            return myTransitionPage(
-              RoomDetailScreen(id: roomId),
-              state,
-            );
+            return myTransitionPage(RoomDetailScreen(id: roomId), state);
           },
         ),
         GoRoute(

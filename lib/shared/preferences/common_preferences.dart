@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:geolocator/geolocator.dart';
-import 'package:htezlife/shared/preferences/base_preferences.dart';
+import 'package:homemind/shared/preferences/base_preferences.dart';
 
 import '../../core/constants/common_constant.dart';
 
@@ -130,18 +130,22 @@ class CommonPreferences extends BasePreference {
       setValue(PreferenceKey.appMenu, json.encode(menu));
 
   Future<List<dynamic>> get appCheckInOutConfig async =>
-      json.decode(await getValue(PreferenceKey.appCheckInOutConfig)) as List<dynamic>;
+      json.decode(await getValue(PreferenceKey.appCheckInOutConfig))
+          as List<dynamic>;
 
   Future setAppCheckInOutConfig(List<dynamic> config) =>
       setValue(PreferenceKey.appCheckInOutConfig, json.encode(config));
 
   Future<Map<String, dynamic>?> get user async =>
-      json.decode(await getValue(PreferenceKey.userData)) as Map<String, dynamic>?;
+      json.decode(await getValue(PreferenceKey.userData))
+          as Map<String, dynamic>?;
 
-  Future setUser(Map<String, dynamic> user) => setValue(PreferenceKey.userData, json.encode(user));
+  Future setUser(Map<String, dynamic> user) =>
+      setValue(PreferenceKey.userData, json.encode(user));
 
   Future<Position?> get position async =>
       json.decode(await getValue(PreferenceKey.position)) as Position?;
 
-  Future setPosition(Position menu) => setValue(PreferenceKey.position, json.encode(menu));
+  Future setPosition(Position menu) =>
+      setValue(PreferenceKey.position, json.encode(menu));
 }

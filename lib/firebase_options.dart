@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyD8c-Be7vNs_QvL9b_3fMphzmwgmzhOMi4',
-    appId: '1:1012555142627:android:dc3ffd9ba76b685e767cd6',
+    appId: '1:1012555142627:android:5fa471462c5c8cbe767cd6',
     messagingSenderId: '1012555142627',
     projectId: 'ht-stg-f450b',
     storageBucket: 'ht-stg-f450b.firebasestorage.app',
@@ -62,11 +62,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDK1zBpmgPNxeo_fzd4lFECI44eBIphrj4',
-    appId: '1:1012555142627:ios:3f07a7031c480ddb767cd6',
+    appId: '1:1012555142627:ios:5012b99608484aac767cd6',
     messagingSenderId: '1012555142627',
     projectId: 'ht-stg-f450b',
     storageBucket: 'ht-stg-f450b.firebasestorage.app',
-    iosBundleId: 'htezlife.co.vn.htezlife',
+    iosBundleId: 'htezlife.co.vn.homemind',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -77,4 +77,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'ht-stg-f450b.firebasestorage.app',
     iosBundleId: 'htezlife.co.vn.htezlife',
   );
+
 }

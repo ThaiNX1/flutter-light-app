@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:htezlife/app/firebase_notifications.dart';
-import 'package:htezlife/core/firebase/fcm_service.dart';
-import 'package:htezlife/core/firebase/initinalize.dart';
-import 'package:htezlife/core/services/graphql_service.dart';
+import 'package:homemind/app/firebase_notifications.dart';
+import 'package:homemind/core/firebase/fcm_service.dart';
+import 'package:homemind/core/firebase/initinalize.dart';
+import 'package:homemind/core/services/graphql_service.dart';
 import 'package:provider/provider.dart';
 
 import 'app/app.dart';
@@ -21,7 +21,7 @@ Future<void> main() async {
 
   // Thực hiện init native/plugin/async ở đây
   await initialExternalServices(commonService);
-  
+
   // Init graphql client
   GraphQLClient initGraphqlClient() {
     final logLink = Link.function((request, [forward]) {
@@ -35,6 +35,7 @@ Future<void> main() async {
       cache: GraphQLCache(store: InMemoryStore()),
     );
   }
+
   commonService.setExpiredTokenHandler(() {
     FcmService.instance.dispose();
     rootNavigatorKey.currentContext?.go('/login');

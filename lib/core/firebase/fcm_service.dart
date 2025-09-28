@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:htezlife/app/firebase_notifications.dart';
-import 'package:htezlife/core/firebase/initinalize.dart';
+import 'package:homemind/app/firebase_notifications.dart';
+import 'package:homemind/core/firebase/initinalize.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:htezlife/core/firebase/notification_service.dart';
-import 'package:htezlife/core/graphql/queries/user.query.dart';
-import 'package:htezlife/core/services/graphql_service.dart';
+import 'package:homemind/core/firebase/notification_service.dart';
+import 'package:homemind/core/graphql/queries/user.query.dart';
+import 'package:homemind/core/services/graphql_service.dart';
 import 'package:provider/provider.dart';
 
 class FcmService {
@@ -29,12 +29,17 @@ class FcmService {
     // iOS: xin quyền + hiển thị noti khi app foreground
     final messaging = FirebaseMessaging.instance;
     final perm = await messaging.requestPermission(
-      alert: true, badge: true, sound: true, provisional: false,
+      alert: true,
+      badge: true,
+      sound: true,
+      provisional: false,
     );
 
     // (iOS) cho phép hiện banner trong foreground
     await messaging.setForegroundNotificationPresentationOptions(
-      alert: true, badge: true, sound: true,
+      alert: true,
+      badge: true,
+      sound: true,
     );
 
     // Khởi tạo local notifications (để tự show khi onMessage)

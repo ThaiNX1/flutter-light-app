@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/guard/auth_provider.dart';
-import 'package:htezlife/shared/popups/popup_error.dart';
-import 'package:htezlife/shared/themes/them.dart';
+import 'package:homemind/core/guard/auth_provider.dart';
+import 'package:homemind/shared/popups/popup_error.dart';
+import 'package:homemind/shared/themes/them.dart';
 import 'package:provider/provider.dart';
 import '../core/services/common_service.dart';
 import 'router.dart';
@@ -15,7 +15,12 @@ class MyApp extends StatelessWidget {
   final AuthProvider auth;
   final GoRouterRefreshStream refreshStream;
   final CommonService commonService;
-  const MyApp({super.key, required this.auth, required this.refreshStream, required this.commonService});
+  const MyApp({
+    super.key,
+    required this.auth,
+    required this.refreshStream,
+    required this.commonService,
+  });
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(

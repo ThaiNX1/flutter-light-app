@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:htezlife/core/enums/view_state.dart';
-import 'package:htezlife/core/services/common_service.dart';
+import 'package:homemind/core/enums/view_state.dart';
+import 'package:homemind/core/services/common_service.dart';
 import 'package:provider/provider.dart';
 
 // --------------------------------------------------------------

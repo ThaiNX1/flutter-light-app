@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:htezlife/features/room/components/room_body.dart';
+import 'package:homemind/features/room/components/room_body.dart';
 
 class RoomScreen extends StatefulWidget {
   const RoomScreen({super.key});

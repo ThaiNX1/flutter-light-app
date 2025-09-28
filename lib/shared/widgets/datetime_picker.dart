@@ -1,4 +1,4 @@
-import 'package:htezlife/core/constants/theme_constant.dart';
+import 'package:homemind/core/constants/theme_constant.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';

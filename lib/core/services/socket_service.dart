@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart' show ChangeNotifier, kIsWeb;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:htezlife/shared/preferences/common_preferences.dart';
+import 'package:homemind/shared/preferences/common_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_common/src/util/event_emitter.dart';
 

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:htezlife/app/layout/main_scaffold.dart';
-import 'package:htezlife/core/config/size_config.dart';
-import 'package:htezlife/core/graphql/queries/extra.query.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
-import 'package:htezlife/core/utils/util.dart';
-import 'package:htezlife/features/home/widgets/dark_container.dart';
-import 'package:htezlife/shared/preferences/common_preferences.dart';
+import 'package:homemind/app/layout/main_scaffold.dart';
+import 'package:homemind/core/config/size_config.dart';
+import 'package:homemind/core/constants/theme_constant.dart';
+import 'package:homemind/core/graphql/queries/extra.query.dart';
+import 'package:homemind/core/provider/base_widget.dart';
+import 'package:homemind/core/utils/util.dart';
+import 'package:homemind/features/home/widgets/dark_container.dart';
+import 'package:homemind/shared/preferences/common_preferences.dart';
 import 'package:jiffy/jiffy.dart';
 
 class HomeBody extends StatefulWidget {
@@ -133,8 +134,8 @@ class _HomeBodyState extends State<HomeBody> with ProviderHelper<HomeBody> {
   Widget build(BuildContext context) {
     // final user = await CommonPreferences.instance.getUser();
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.menu, size: 32, weight: 400, color: Colors.white),
@@ -176,6 +177,7 @@ class _HomeBodyState extends State<HomeBody> with ProviderHelper<HomeBody> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: MySpacing.medium,
             children: [
               // Thời tiết
               Container(
@@ -270,10 +272,9 @@ class _HomeBodyState extends State<HomeBody> with ProviderHelper<HomeBody> {
               ),
               // Phòng
               Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(getProportionateScreenHeight(5)),
+                spacing: MySpacing.medium,
+                children: [
+                  Expanded(
                     child: DarkContainer(
                       itsOn: true,
                       switchButton: () {},
@@ -285,24 +286,20 @@ class _HomeBodyState extends State<HomeBody> with ProviderHelper<HomeBody> {
                       isFav: false,
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(getProportionateScreenHeight(5)),
+                  Expanded(
                     child: DarkContainer(
                       itsOn: false,
                       switchButton: () {},
                       onTap: () {},
-                      iconAsset: 'assets/icons/svg/ac.svg',
+                      iconAsset: 'assets/icons/svg/light.svg',
                       device: 'Phòng khách',
                       deviceCount: '8 đèn',
                       switchFav: () {},
                       isFav: true,
                     ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
             ],
           ),
         ),

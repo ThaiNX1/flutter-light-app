@@ -1,9 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/graphql/queries/device.query.dart';
-import 'package:htezlife/core/graphql/schema.graphql.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
+import 'package:homemind/core/graphql/queries/device.query.dart';
+import 'package:homemind/core/graphql/schema.graphql.dart';
+import 'package:homemind/core/provider/base_widget.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class DeviceBody extends StatefulWidget {
@@ -83,7 +83,7 @@ class _DeviceBodyState extends State<DeviceBody>
         ? 3
         : 2;
     return Scaffold(
-      backgroundColor: Color(0xFF000000).withValues(alpha: 0.5),
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -101,12 +101,7 @@ class _DeviceBodyState extends State<DeviceBody>
         ),
         title: Text(
           'Danh sách thiết bị',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            textBaseline: TextBaseline.alphabetic,
-            color: Colors.white,
-          ),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         centerTitle: true,
       ),

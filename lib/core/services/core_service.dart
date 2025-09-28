@@ -5,8 +5,8 @@ import 'package:cryptography/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:htezlife/core/constants/common_constant.dart';
-import 'package:htezlife/core/services/common_service.dart';
+import 'package:homemind/core/constants/common_constant.dart';
+import 'package:homemind/core/services/common_service.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
@@ -18,8 +18,11 @@ class CoreService {
     final auth = LocalAuthentication();
     final commonService = context.read<CommonService>();
     // Nếu đang trong thời gian khoá, không cho thử tiếp
-    if (commonService.lockUntil != null && DateTime.now().isBefore(commonService.lockUntil!)) {
-      final remain = commonService.lockUntil!.difference(DateTime.now()).inSeconds;
+    if (commonService.lockUntil != null &&
+        DateTime.now().isBefore(commonService.lockUntil!)) {
+      final remain = commonService.lockUntil!
+          .difference(DateTime.now())
+          .inSeconds;
       // TODO: hiện snack/toast: 'Bạn đã thử sai nhiều lần. Hãy đợi $remain giây.'
       return false;
     }
@@ -52,7 +55,9 @@ class CoreService {
     } on PlatformException catch (e) {
       // Lockout tạm thời (30s) hoặc vĩnh viễn (đến khi mở khoá bằng credential)
       if (e.code == 'LockedOut') {
-        commonService.setLockUntil(DateTime.now().add(const Duration(seconds: 30)));
+        commonService.setLockUntil(
+          DateTime.now().add(const Duration(seconds: 30)),
+        );
         // Cho phép dùng credential ngay cả khi biometric bị khoá
         return await auth.authenticate(
           localizedReason:
@@ -77,9 +82,11 @@ class CoreService {
       }
       return false;
     }
-  }  
-  
-  Future<Map<String, dynamic>> getOrCreateDeviceIdAndKeypair(FlutterSecureStorage storage) async {
+  }
+
+  Future<Map<String, dynamic>> getOrCreateDeviceIdAndKeypair(
+    FlutterSecureStorage storage,
+  ) async {
     final ed = Ed25519();
     var result = {'deviceId': '', 'privateKey': '', 'publicKey': ''};
     var deviceId = await storage.read(key: PreferenceKey.deviceId);
@@ -111,9 +118,7 @@ class CoreService {
   Future<void> removeKeypair(FlutterSecureStorage storage) async {
     var deviceId = await storage.read(key: PreferenceKey.deviceId);
     if (deviceId != null) {
-      await Future.wait([
-        storage.delete(key: PreferenceKey.privateKey),
-      ]);
+      await Future.wait([storage.delete(key: PreferenceKey.privateKey)]);
     }
   }
 }

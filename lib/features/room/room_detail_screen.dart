@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:htezlife/features/room/components/room_detail_body.dart';
+import 'package:homemind/features/room/components/room_detail_body.dart';
 
 class RoomDetailScreen extends StatefulWidget {
-  const RoomDetailScreen({
-    super.key,
-    required this.id,
-  });
+  const RoomDetailScreen({super.key, required this.id});
 
   final String id;
 

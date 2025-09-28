@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:htezlife/shared/preferences/common_preferences.dart';
+import 'package:homemind/shared/preferences/common_preferences.dart';
 
 class CommonService extends ChangeNotifier {
   bool _globalLoading = false;

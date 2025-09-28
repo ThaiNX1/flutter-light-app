@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:htezlife/shared/preferences/common_preferences.dart';
+import 'package:homemind/shared/preferences/common_preferences.dart';
 import 'common_service.dart';
 
 class GraphQLService {

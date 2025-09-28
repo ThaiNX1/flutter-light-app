@@ -1,7 +1,7 @@
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:htezlife/core/constants/theme_constant.dart';
+import 'package:homemind/core/constants/theme_constant.dart';
 
 class ReactiveAutocompleteField<T> extends StatelessWidget {
   final String formControlName;

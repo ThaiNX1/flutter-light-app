@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/app/layout/components/list_tile.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
-import 'package:htezlife/shared/preferences/preferences.dart';
+import 'package:homemind/app/layout/components/list_tile.dart';
+import 'package:homemind/core/provider/base_widget.dart';
+import 'package:homemind/shared/preferences/preferences.dart';
 
 class MenuList extends StatefulWidget {
   const MenuList({super.key});

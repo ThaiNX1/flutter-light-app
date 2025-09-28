@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/services/ble_plus_service.dart';
+import 'package:homemind/core/services/ble_plus_service.dart';
 
 class DeviceInfo extends StatefulWidget {
   final ValueChanged<dynamic>? onChanged;

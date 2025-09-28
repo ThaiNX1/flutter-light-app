@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:htezlife/shared/popups/popup_widgets/popup_alert_dialog.dart';
-import 'package:htezlife/shared/popups/popup_widgets/popup_list_tile.dart';
+import 'package:homemind/shared/popups/popup_widgets/popup_alert_dialog.dart';
+import 'package:homemind/shared/popups/popup_widgets/popup_list_tile.dart';
 
 class PopupForm extends StatelessWidget {
   const PopupForm({

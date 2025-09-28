@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:htezlife/features/profile/components/profile_body.dart';
+import 'package:homemind/features/profile/components/profile_body.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

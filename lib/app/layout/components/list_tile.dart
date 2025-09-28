@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:htezlife/core/config/size_config.dart';
+import 'package:homemind/core/config/size_config.dart';
 
 class MenuListItems extends StatelessWidget {
   final String icon;

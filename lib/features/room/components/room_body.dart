@@ -1,15 +1,17 @@
 import 'dart:async';
+import 'dart:ui' as BorderType;
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/config/size_config.dart';
-import 'package:htezlife/core/constants/common_constant.dart';
-import 'package:htezlife/core/constants/theme_constant.dart';
-import 'package:htezlife/core/graphql/queries/room.query.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
-import 'package:htezlife/core/services/socket_service.dart';
-import 'package:htezlife/features/home/widgets/dark_container.dart';
-import 'package:htezlife/shared/entity/room_socket_response.dart';
+import 'package:homemind/core/config/size_config.dart';
+import 'package:homemind/core/constants/common_constant.dart';
+import 'package:homemind/core/constants/theme_constant.dart';
+import 'package:homemind/core/graphql/queries/room.query.dart';
+import 'package:homemind/core/provider/base_widget.dart';
+import 'package:homemind/core/services/socket_service.dart';
+import 'package:homemind/features/home/widgets/dark_container.dart';
+import 'package:homemind/shared/entity/room_socket_response.dart';
 
 class RoomBody extends StatefulWidget {
   const RoomBody({super.key});
@@ -124,12 +126,7 @@ class _RoomBodyState extends State<RoomBody> with ProviderHelper<RoomBody> {
         ),
         title: Text(
           'Danh sách phòng',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            textBaseline: TextBaseline.alphabetic,
-            color: Colors.white,
-          ),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         centerTitle: true,
         actions: [
@@ -142,7 +139,7 @@ class _RoomBodyState extends State<RoomBody> with ProviderHelper<RoomBody> {
             ),
             controller: actionAppbarController,
             builder: (context, ctrl, child) => IconButton(
-              icon: Icon(Icons.more_vert_rounded, color: Colors.white),
+              icon: Icon(Icons.more_vert_rounded),
               onPressed: () => ctrl.isOpen ? ctrl.close() : ctrl.open(),
             ),
             menuChildren: [
@@ -170,32 +167,53 @@ class _RoomBodyState extends State<RoomBody> with ProviderHelper<RoomBody> {
           ),
         ],
       ),
-      body: Column(
-        spacing: MySpacing.large,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            spacing: MySpacing.medium,
-            children: [
-              Expanded(child: _buildFilterChips()),
-              IconButton(
-                onPressed: () => setState(() => isGridView = !isGridView),
-                icon: Icon(
-                  isGridView ? Icons.list_outlined : Icons.grid_view_outlined,
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: SingleChildScrollView(
+        child: Column(
+          spacing: MySpacing.large,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: MySpacing.medium,
               children: [
-                _buildGridView(rooms)
+                Expanded(child: _buildFilterChips()),
+                IconButton(
+                  onPressed: () => setState(() => isGridView = !isGridView),
+                  icon: Icon(
+                    isGridView ? Icons.list_outlined : Icons.grid_view_outlined,
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [_buildGridView(rooms)],
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 16),
+              child: DottedBorder(
+                options: RoundedRectDottedBorderOptions(
+                  color: MyColor.trackColor,
+                  dashPattern: const [6, 4],
+                  radius: Radius.circular(8),
+                  padding: const EdgeInsets.all(16),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: MySpacing.medium,
+                  children: [
+                    Icon(Icons.add_circle_outline, color: MyColor.trackColor),
+                    Text(
+                      'Thêm phòng',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -256,8 +274,10 @@ class _RoomBodyState extends State<RoomBody> with ProviderHelper<RoomBody> {
           child: DarkContainer(
             itsOn: rooms[index]['isAllOn'],
             switchButton: () {},
-            onTap: () {},
-            iconAsset: 'assets/icons/svg/speaker.svg',
+            onTap: () {
+              context.push('/detail-room/${rooms[index]['id']}');
+            },
+            iconAsset: 'assets/icons/svg/light.svg',
             device: rooms[index]['name'],
             deviceCount: rooms[index]['devices'].length.toString() + ' device',
             switchFav: () {},

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/constants/theme_constant.dart';
+import 'package:homemind/core/constants/theme_constant.dart';
 
 CustomTransitionPage<dynamic> myTransitionPage(
   Widget child,
@@ -38,14 +38,17 @@ CustomTransitionPage<dynamic> myTransitionPage(
       // );
 
       // Trang MỚI: trượt từ phải -> trái
-      final slideIn = Tween<Offset>(
-        begin: const Offset(1.0, 0.0),
-        end: Offset.zero,
-      ).animate(CurvedAnimation(
-        parent: animation,
-        curve: Curves.easeOutCubic,
-        reverseCurve: Curves.easeInCubic,
-      ));
+      final slideIn =
+          Tween<Offset>(
+            begin: const Offset(1.0, 0.0),
+            end: Offset.zero,
+          ).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeOutCubic,
+              reverseCurve: Curves.easeInCubic,
+            ),
+          );
 
       // Trang CŨ (chính TRANG NÀY khi có route khác đè lên): fade-out hoàn toàn
       // secondaryAnimation: 0 -> 1 khi có route mới push lên
@@ -60,10 +63,7 @@ CustomTransitionPage<dynamic> myTransitionPage(
       // Kết hợp: khi trang này là MỚI -> slideIn; khi là CŨ -> fadeOut
       return FadeTransition(
         opacity: fadeOutOld,
-        child: SlideTransition(
-          position: slideIn,
-          child: child,
-        ),
+        child: SlideTransition(position: slideIn, child: child),
       );
     },
   );

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/graphql/queries/auth.query.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
+import 'package:homemind/core/graphql/queries/auth.query.dart';
+import 'package:homemind/core/provider/base_widget.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ConfirmOtpBody extends StatefulWidget {

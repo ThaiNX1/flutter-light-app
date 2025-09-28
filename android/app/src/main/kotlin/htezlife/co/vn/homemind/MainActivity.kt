@@ -1,4 +1,4 @@
-package htezlife.co.vn.htezlife
+package htezlife.co.vn.homemind
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 

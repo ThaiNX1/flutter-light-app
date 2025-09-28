@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:htezlife/core/config/size_config.dart';
+import 'package:homemind/core/config/size_config.dart';
 
 class DarkContainer extends StatelessWidget {
   final String iconAsset;
@@ -51,8 +51,9 @@ class DarkContainer extends StatelessWidget {
                     height: 50,
                     decoration: BoxDecoration(
                       color: const Color(0xffdadada),
-                      borderRadius:
-                          const BorderRadius.all(Radius.elliptical(45, 45)),
+                      borderRadius: const BorderRadius.all(
+                        Radius.elliptical(45, 45),
+                      ),
                     ),
                     child: SvgPicture.asset(
                       iconAsset,
@@ -64,9 +65,9 @@ class DarkContainer extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: switchFav,
-                    child:  Icon(
+                    child: Icon(
                       Icons.star_rounded,
-                      color: isFav ?  Colors.amber:const Color(0xFF808080),
+                      color: isFav ? Colors.amber : const Color(0xFF808080),
                       // color: Color(0xFF808080),
                     ),
                   ),
@@ -78,19 +79,20 @@ class DarkContainer extends StatelessWidget {
                   Text(
                     device,
                     textAlign: TextAlign.left,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.black,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium?.copyWith(color: Colors.black),
                   ),
                   Text(
                     deviceCount,
                     textAlign: TextAlign.left,
                     style: const TextStyle(
-                        color: Color.fromRGBO(166, 166, 166, 1),
-                        fontSize: 13,
-                        letterSpacing: 0,
-                        fontWeight: FontWeight.normal,
-                        height: 1.6),
+                      color: Color.fromRGBO(166, 166, 166, 1),
+                      fontSize: 13,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.normal,
+                      height: 1.6,
+                    ),
                   ),
                 ],
               ),
@@ -98,11 +100,11 @@ class DarkContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    itsOn ? 'On' : 'Off',
+                    itsOn ? 'Bật' : 'Tắt',
                     textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.black,
-                        ),
+                      color: itsOn ? Colors.amber : Colors.white,
+                    ),
                   ),
                   GestureDetector(
                     onTap: switchButton,
@@ -112,7 +114,7 @@ class DarkContainer extends StatelessWidget {
                       padding: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: itsOn ? Colors.black : const Color(0xffd6d6d6),
+                        color: itsOn ? Colors.amber : const Color(0xffd6d6d6),
                         border: Border.all(
                           color: const Color.fromRGBO(255, 255, 255, 1),
                           width: itsOn ? 2 : 0,
@@ -132,7 +134,7 @@ class DarkContainer extends StatelessWidget {
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ],

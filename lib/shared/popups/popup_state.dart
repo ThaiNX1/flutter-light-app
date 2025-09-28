@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:htezlife/shared/popups/popup_widgets/popup_alert_dialog.dart';
-import 'package:htezlife/shared/popups/popup_widgets/popup_icon.dart';
-import 'package:htezlife/shared/popups/popup_widgets/popup_list_tile.dart';
+import 'package:homemind/shared/popups/popup_widgets/popup_alert_dialog.dart';
+import 'package:homemind/shared/popups/popup_widgets/popup_icon.dart';
+import 'package:homemind/shared/popups/popup_widgets/popup_list_tile.dart';
 
 class PopupState extends StatelessWidget {
   const PopupState({

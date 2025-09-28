@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:htezlife/core/constants/common_constant.dart';
-import 'package:htezlife/core/graphql/queries/device.query.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
+import 'package:homemind/core/constants/common_constant.dart';
+import 'package:homemind/core/graphql/queries/device.query.dart';
+import 'package:homemind/core/provider/base_widget.dart';
 
 class SwitchCard extends StatefulWidget {
   const SwitchCard({super.key, required this.switchItem, required this.index});
@@ -12,37 +12,45 @@ class SwitchCard extends StatefulWidget {
   State<SwitchCard> createState() => _SwitchCardState();
 }
 
-class _SwitchCardState extends State<SwitchCard> with ProviderHelper<SwitchCard> {
+class _SwitchCardState extends State<SwitchCard>
+    with ProviderHelper<SwitchCard> {
   bool _isOn = false;
 
   @override
   void initState() {
     super.initState();
-    _isOn = widget.switchItem['controlSwitch${widget.index + 1}'] == DeviceControlEnum.on;
+    _isOn =
+        widget.switchItem['controlSwitch${widget.index + 1}'] ==
+        DeviceControlEnum.on;
   }
 
   @override
   void didUpdateWidget(covariant SwitchCard oldWidget) {
     super.didUpdateWidget(oldWidget);
     setState(() {
-      _isOn = widget.switchItem['controlSwitch${widget.index + 1}'] == DeviceControlEnum.on;
+      _isOn =
+          widget.switchItem['controlSwitch${widget.index + 1}'] ==
+          DeviceControlEnum.on;
     });
   }
 
-  onUpdateSwitchStatus(){
+  onUpdateSwitchStatus() {
     setState(() {
       _isOn = !_isOn;
     });
     getGraphQLService(context).execute(
-      document: controlDeviceQuery, 
-      isMutation: true, 
+      document: controlDeviceQuery,
+      isMutation: true,
       includeGlobalLoading: false,
       variables: {
-      'input': {
-        'id': widget.switchItem['id'],
-        'controlSwitch${widget.index + 1}': _isOn ? DeviceControlEnum.on : DeviceControlEnum.off,
+        'input': {
+          'id': widget.switchItem['id'],
+          'controlSwitch${widget.index + 1}': _isOn
+              ? DeviceControlEnum.on
+              : DeviceControlEnum.off,
+        },
       },
-    });
+    );
   }
 
   @override

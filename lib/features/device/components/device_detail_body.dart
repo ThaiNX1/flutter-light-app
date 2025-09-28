@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:htezlife/core/provider/base_widget.dart';
-import 'package:htezlife/features/device/widgets/switch_bottom_button.dart';
-import 'package:htezlife/features/device/widgets/switch_card.dart';
+import 'package:homemind/core/provider/base_widget.dart';
+import 'package:homemind/features/device/widgets/switch_bottom_button.dart';
+import 'package:homemind/features/device/widgets/switch_card.dart';
 
 class DeviceDetailBody extends StatefulWidget {
   const DeviceDetailBody({super.key, required this.deviceId});
